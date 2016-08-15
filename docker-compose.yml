@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  nginx:
+    build: ./nginx
+    restart: always
+    ports:
+      - "80:80"
+  auth:
+    image: node:6.3
+    restart: always
+    command: node /src/index.js
+    volumes:
+      - "./auth:/src"
+  app:
+    image: node:6.3
+    restart: always
+    command: node /src/index.js
+    volumes:
+      - "./app:/src"
